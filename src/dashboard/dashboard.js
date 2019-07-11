@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import PropTypes            from "prop-types";
+import { connect }          from "react-redux";
+import * as action          from "./actions";
 import "./styles.scss";
 
 import Header from "./components/header/header";
@@ -25,6 +28,31 @@ class DashBoard extends Component {
 			</div>
 		);
 	}
+
+	componentDidMount() {
+		this.fetchData();
+	}
+
+	fetchData = () => {
+		this.props.fetchCloudData();
+		this.props.fetchSolarData();
+		this.props.fetchPanelData();
+	};
 }
 
-export default DashBoard;
+DashBoard.propTypes = {
+	fetchCloudData: PropTypes.func,
+	fetchSolarData: PropTypes.func,
+	fetchPanelData: PropTypes.func,
+};
+
+
+const mapDispatchToProps = dispatch => {
+	return {
+		fetchCloudData: () => dispatch(action.fetchCloudData()),
+		fetchSolarData: () => dispatch(action.fetchSolarData()),
+		fetchPanelData: () => dispatch(action.fetchPanelData()),
+	};
+};
+
+export default connect(null, mapDispatchToProps)(DashBoard);
