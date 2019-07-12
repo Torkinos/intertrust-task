@@ -4,7 +4,8 @@ import { connect }          from "react-redux";
 import { getTotalKw }       from "../../selectors";
 import "./styles.scss";
 
-import Card from "../../components/card/card";
+import Card    from "../../components/card/card";
+import TotalKw from "../../components/totalKw/totalKw";
 
 class Forecast extends Component {
 
@@ -25,7 +26,9 @@ class Forecast extends Component {
 
 					{/*total energy*/ }
 					<div className = "forecast__inner forecast__inner--top">
-						<Card>{ totalKw }</Card>
+						<Card>
+							<TotalKw total = { totalKw } />
+						</Card>
 					</div>
 
 					{/*sky clearness*/ }
