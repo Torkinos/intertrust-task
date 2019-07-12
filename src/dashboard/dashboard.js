@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes            from "prop-types";
 import { connect }          from "react-redux";
+import { getTotalKw }       from "./selectors";
 import * as action          from "./actions";
 import "./styles.scss";
 
@@ -46,6 +47,11 @@ DashBoard.propTypes = {
 	fetchPanelData: PropTypes.func,
 };
 
+const mapStateToProps = state => {
+	return {
+		totalKw: getTotalKw(state)
+	};
+};
 
 const mapDispatchToProps = dispatch => {
 	return {
@@ -55,4 +61,4 @@ const mapDispatchToProps = dispatch => {
 	};
 };
 
-export default connect(null, mapDispatchToProps)(DashBoard);
+export default connect(mapStateToProps, mapDispatchToProps)(DashBoard);

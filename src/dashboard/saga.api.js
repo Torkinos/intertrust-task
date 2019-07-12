@@ -76,16 +76,28 @@ export function* fetchSolarData() {
 export function* fetchPanelData() {
 	try {
 
-		const systemId = "68619",
-					key      = "1a3be8810098efd00370ea0c8dabbda7a5988a6b",
-					url      = `https://pvoutput.org/service/r2/getstatus.jsp?key=${ key }&sid=${ systemId }`;
+		const data = [];
 
-		const response = yield axios.get(url);
-		console.log("response : ", response);
+		for (let i = 0; i < 30; i++) {
 
-		// yield put(actions.setCloudData(data));
+			const index = i < 10
+										? "0" + i
+										: i;
+
+			data.push({
+				id:      `SP-0${ index }`,
+				wattage: generateRandom(100, 250),
+				voltage: generateRandom(12, 17),
+			});
+		}
+
+		yield put(actions.setPanelData(data));
 	}
 	catch (e) {
 		console.log("error : ", e);
 	}
 }
+
+const generateRandom = (min, max) => {
+	return Math.floor(Math.random() * (max - min)) + min;
+};

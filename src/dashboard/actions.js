@@ -22,7 +22,7 @@ export const setSolarData = payload => {
 	return { type: actionType.SET_SOLAR_DATA, payload };
 };
 
-export const setPanelData = () => {
-	return { type: actionType.SET_PANEL_DATA };
+export const setPanelData = payload => {
+	return { type: actionType.SET_PANEL_DATA, payload };
 };
 
