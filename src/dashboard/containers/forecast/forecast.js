@@ -4,6 +4,8 @@ import { connect }          from "react-redux";
 import { getTotalKw }       from "../../selectors";
 import "./styles.scss";
 
+import Card from "../../components/card/card";
+
 class Forecast extends Component {
 
 	constructor(props) {
@@ -17,7 +19,25 @@ class Forecast extends Component {
 
 		return (
 			<div className = "forecast">
-				{ totalKw }
+
+				{/*left container*/ }
+				<div className = "forecast__container forecast__container--left">
+
+					{/*total energy*/ }
+					<div className = "forecast__inner forecast__inner--top">
+						<Card>{ totalKw }</Card>
+					</div>
+
+					{/*sky clearness*/ }
+					<div className = "forecast__inner forecast__inner--bot">
+						<Card></Card>
+					</div>
+				</div>
+
+				{/*right container*/ }
+				<div className = "forecast__container forecast__container--right">
+					<Card></Card>
+				</div>
 			</div>
 		);
 	}
