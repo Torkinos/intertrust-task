@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import PropTypes            from "prop-types";
 import { connect }          from "react-redux";
-import { getTotalKw }       from "./selectors";
 import * as action          from "./actions";
 import "./styles.scss";
 
-import Header from "./components/header/header";
+import Header   from "./components/header/header";
+import Forecast from "./containers/forecast/forecast";
 
 class DashBoard extends Component {
 
@@ -25,6 +25,14 @@ class DashBoard extends Component {
 
 				{/*body*/ }
 				<div className = "dashboard__body">
+
+					{/*container top*/ }
+					<div className = "dashboard__container dashboard__container--top">
+						<Forecast />
+					</div>
+
+					{/*container bot*/ }
+					<div className = "dashboard__container dashboard__container--bot"></div>
 				</div>
 			</div>
 		);
@@ -47,12 +55,6 @@ DashBoard.propTypes = {
 	fetchPanelData: PropTypes.func,
 };
 
-const mapStateToProps = state => {
-	return {
-		totalKw: getTotalKw(state)
-	};
-};
-
 const mapDispatchToProps = dispatch => {
 	return {
 		fetchCloudData: () => dispatch(action.fetchCloudData()),
@@ -61,4 +63,4 @@ const mapDispatchToProps = dispatch => {
 	};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(DashBoard);
+export default connect(null, mapDispatchToProps)(DashBoard);

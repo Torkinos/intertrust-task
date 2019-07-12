@@ -1,7 +1,8 @@
 .dashboard {
 	width:            100%;
-	height:           100vh;
+	min-height:       100vh;
 	background-color: #121212;
+	min-width:        380px;
 
 	&__header {
 		width:  100%;

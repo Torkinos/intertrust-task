@@ -1,5 +1,7 @@
+@import "./styles/styles";
+
 html {
-	color:       rgba(255, 255, 255, 0.8);
+	color:       $fontColor;
 	font-family: Roboto, sans-serif;
 	// set base for rem units
 	font-size:   62.5%;
