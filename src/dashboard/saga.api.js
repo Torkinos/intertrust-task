@@ -25,15 +25,21 @@ const mock = `axis:latitude,axis:longitude,axis:reftime,axis:time,data:av_ttl_cl
 49.453125,-50.625,"2019-07-11T12:00:00","2019-07-12T12:00:00",55.984375
 49.453125,-50.625,"2019-07-11T12:00:00","2019-07-12T15:00:00",14.0`;
 
+// should be removed lately
+const mockCloud = `axis:latitude,axis:longitude,axis:reftime,axis:time,data:av_ttl_cld
+49.453125,-50.625,"2019-07-11T12:00:00","2019-07-11T15:00:00",0.53`;
+
 export function* fetchCloudData() {
 	try {
 
 		// const response = yield axios.get(forecastUrl + "&var=av_ttl_cld&csv=true&count=1");
-		const response = {
-			data: mock
+		const response  = {
+			data: mockCloud
 		};
-		const arr      = response.data.split(","),
-					data     = arr[arr.length - 1];
+		const arr       = response.data.split(","),
+					currValue = arr[arr.length - 1],
+					data      = generateRandom(0, 100);
+		// data      = Math.round(parseFloat(currValue) * 100);
 
 		yield put(actions.setCloudData(data));
 	}

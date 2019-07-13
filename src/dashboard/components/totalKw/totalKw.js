@@ -13,7 +13,7 @@ const totalKw = props => {
 
 			{/*header*/ }
 			<div className = "total-kw__header">
-				{ TOTAL_KW.totalEnergy }
+				{ TOTAL_KW.title }
 			</div>
 
 			{/*info number*/ }
