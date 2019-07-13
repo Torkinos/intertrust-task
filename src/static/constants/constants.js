@@ -12,3 +12,7 @@ export const CLOUD_COV = {
 	title:    "cloud coverage",
 	clearSky: "clear sky"
 };
+
+export const SOLAR_ACTIVITY = {
+	title: "solar activity"
+};
