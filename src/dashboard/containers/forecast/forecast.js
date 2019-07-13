@@ -1,11 +1,12 @@
-import React, { Component } from "react";
-import PropTypes            from "prop-types";
-import { connect }          from "react-redux";
-import { getTotalKw }       from "../../selectors";
+import React, { Component }         from "react";
+import PropTypes                    from "prop-types";
+import { connect }                  from "react-redux";
+import { getTotalKw, getCloudData } from "../../selectors";
 import "./styles.scss";
 
-import Card    from "../../components/card/card";
-import TotalKw from "../../components/totalKw/totalKw";
+import Card     from "../../components/card/card";
+import TotalKw  from "../../components/totalKw/totalKw";
+import CloudCov from "../../components/cloud-cov/cloud-cov";
 
 class Forecast extends Component {
 
@@ -16,7 +17,7 @@ class Forecast extends Component {
 
 	render() {
 
-		const { totalKw } = this.props;
+		const { totalKw, cloudData } = this.props;
 
 		return (
 			<div className = "forecast">
@@ -33,7 +34,9 @@ class Forecast extends Component {
 
 					{/*sky clearness*/ }
 					<div className = "forecast__inner forecast__inner--bot">
-						<Card></Card>
+						<Card>
+							<CloudCov value = { cloudData } />
+						</Card>
 					</div>
 				</div>
 
@@ -47,12 +50,14 @@ class Forecast extends Component {
 }
 
 Forecast.propTypes = {
-	totalKw: PropTypes.number
+	totalKw:   PropTypes.number,
+	cloudData: PropTypes.number,
 };
 
 const mapStateToProps = state => {
 	return {
-		totalKw: getTotalKw(state)
+		totalKw:   getTotalKw(state),
+		cloudData: getCloudData(state),
 	};
 };
 

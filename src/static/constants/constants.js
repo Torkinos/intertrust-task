@@ -4,6 +4,11 @@ export const HEADER = {
 };
 
 export const TOTAL_KW = {
-	totalEnergy: "total energy",
-	kw:          "kw"
+	title: "total energy",
+	kw:    "kw"
+};
+
+export const CLOUD_COV = {
+	title:    "cloud coverage",
+	clearSky: "clear sky"
 };
