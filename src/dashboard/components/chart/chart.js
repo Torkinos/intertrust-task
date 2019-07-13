@@ -13,7 +13,7 @@ class SolarChart extends Component {
 		this.chart = null;
 
 		this.state = {
-			tablet: window.innerWidth < 769
+			tablet: window.innerWidth < 1025
 		};
 	}
 
@@ -49,6 +49,7 @@ class SolarChart extends Component {
 			},
 			options: {
 				maintainAspectRatio: this.state.tablet,
+				aspectRatio:         2.5,
 				legend:              {
 					display: false
 				},
@@ -65,7 +66,7 @@ class SolarChart extends Component {
 
 	onResize = () => {
 
-		const tablet = window.innerWidth < 769;
+		const tablet = window.innerWidth < 1025;
 
 		if (this.state.tablet !== tablet) {
 			this.setState({ tablet });

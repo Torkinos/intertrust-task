@@ -6,6 +6,7 @@ import "./styles.scss";
 
 import Header   from "./components/header/header";
 import Forecast from "./containers/forecast/forecast";
+import Panels   from "./containers/panels/panels";
 
 class DashBoard extends Component {
 
@@ -32,7 +33,9 @@ class DashBoard extends Component {
 					</div>
 
 					{/*container bot*/ }
-					<div className = "dashboard__container dashboard__container--bot"></div>
+					<div className = "dashboard__container dashboard__container--bot">
+						<Panels />
+					</div>
 				</div>
 			</div>
 		);

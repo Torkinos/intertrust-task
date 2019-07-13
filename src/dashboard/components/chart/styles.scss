@@ -7,13 +7,14 @@
 
 	&__header {
 		width:          100%;
-		font-size:      1.2rem;
 		text-align:     left;
 		text-transform: capitalize;
 		//
-		padding-bottom: 8px;
+		font-size:      1.4rem;
+		padding-bottom: 16px;
 
-		@include tablet-sm() {
+		@include tablet() {
+			font-size:      1.6rem;
 			padding-bottom: 0;
 			height:         32px;
 		}
@@ -23,7 +24,7 @@
 		width:  100%;
 		height: 100%;
 
-		@include tablet-sm() {
+		@include tablet() {
 			height: calc(100% - 32px) !important;
 		}
 	}
