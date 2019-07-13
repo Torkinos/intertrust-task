@@ -11,21 +11,20 @@
 		height:         144px;
 		width:          100%;
 
-		@include tablet-sm() {
-			height: 100%;
-		}
-
 		&--left {
 			@include tablet-sm() {
-				width: 25%;
+				width:  200px;
+				height: 100%;
 			}
 		}
 
 		&--right {
+			height:      auto;
 			padding-top: 8px;
 
 			@include tablet-sm() {
-				width:        75%;
+				width:        calc(100% - 200px);
+				height:       100%;
 				padding-top:  0;
 				padding-left: 8px;
 			}

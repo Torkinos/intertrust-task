@@ -1,12 +1,13 @@
-import React, { Component }         from "react";
-import PropTypes                    from "prop-types";
-import { connect }                  from "react-redux";
-import { getTotalKw, getCloudData } from "../../selectors";
+import React, { Component }                       from "react";
+import PropTypes                                  from "prop-types";
+import { connect }                                from "react-redux";
+import { getTotalKw, getCloudData, getSolarData } from "../../selectors";
 import "./styles.scss";
 
-import Card     from "../../components/card/card";
-import TotalKw  from "../../components/totalKw/totalKw";
-import CloudCov from "../../components/cloud-cov/cloud-cov";
+import Card       from "../../components/card/card";
+import TotalKw    from "../../components/totalKw/totalKw";
+import CloudCov   from "../../components/cloud-cov/cloud-cov";
+import SolarChart from "../../components/chart/chart";
 
 class Forecast extends Component {
 
@@ -17,7 +18,16 @@ class Forecast extends Component {
 
 	render() {
 
-		const { totalKw, cloudData } = this.props;
+		const { totalKw, cloudData, solarData } = this.props;
+
+		const chart = solarData !== null
+									? (
+										<SolarChart
+											data = { solarData.values }
+											labels = { solarData.hours }
+										/>
+									)
+									: null;
 
 		return (
 			<div className = "forecast">
@@ -27,14 +37,14 @@ class Forecast extends Component {
 
 					{/*total energy*/ }
 					<div className = "forecast__inner forecast__inner--top">
-						<Card>
+						<Card data = { totalKw !== null }>
 							<TotalKw total = { totalKw } />
 						</Card>
 					</div>
 
 					{/*sky clearness*/ }
 					<div className = "forecast__inner forecast__inner--bot">
-						<Card>
+						<Card data = { solarData !== null }>
 							<CloudCov value = { cloudData } />
 						</Card>
 					</div>
@@ -42,7 +52,9 @@ class Forecast extends Component {
 
 				{/*right container*/ }
 				<div className = "forecast__container forecast__container--right">
-					<Card></Card>
+					<Card data = { solarData !== null }>
+						{ chart }
+					</Card>
 				</div>
 			</div>
 		);
@@ -52,12 +64,14 @@ class Forecast extends Component {
 Forecast.propTypes = {
 	totalKw:   PropTypes.number,
 	cloudData: PropTypes.number,
+	solarData: PropTypes.object,
 };
 
 const mapStateToProps = state => {
 	return {
 		totalKw:   getTotalKw(state),
 		cloudData: getCloudData(state),
+		solarData: getSolarData(state),
 	};
 };
 
