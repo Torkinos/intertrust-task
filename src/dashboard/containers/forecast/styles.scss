@@ -16,6 +16,10 @@
 				width:  200px;
 				height: 100%;
 			}
+
+			@include desktop() {
+				width: 256px;
+			}
 		}
 
 		&--right {
@@ -27,6 +31,10 @@
 				height:       100%;
 				padding-top:  0;
 				padding-left: 8px;
+			}
+
+			@include desktop() {
+				width: calc(100% - 256px);
 			}
 		}
 	}
