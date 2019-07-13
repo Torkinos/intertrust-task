@@ -7,9 +7,14 @@
 
 	&__header {
 		width:          100%;
-		font-size:      1.2rem;
 		text-align:     left;
 		text-transform: capitalize;
+		//
+		font-size:      1.4rem;
+
+		@include tablet() {
+			font-size: 1.6rem;
+		}
 	}
 
 	&__info {
