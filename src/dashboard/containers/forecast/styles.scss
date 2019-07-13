@@ -12,7 +12,7 @@
 		width:          100%;
 
 		&--left {
-			@include tablet-sm() {
+			@include tablet() {
 				width:  200px;
 				height: 100%;
 			}
@@ -22,7 +22,7 @@
 			height:      auto;
 			padding-top: 8px;
 
-			@include tablet-sm() {
+			@include tablet() {
 				width:        calc(100% - 200px);
 				height:       100%;
 				padding-top:  0;
@@ -38,14 +38,14 @@
 		width:          50%;
 		height:         100%;
 
-		@include tablet-sm() {
+		@include tablet() {
 			width: 100%;
 		}
 
 		&--top {
 			padding-right: 4px;
 
-			@include tablet-sm() {
+			@include tablet() {
 				padding-right: 0;
 				height:        40%;
 			}
@@ -54,7 +54,7 @@
 		&--bot {
 			padding-left: 4px;
 
-			@include tablet-sm() {
+			@include tablet() {
 				padding-left: 0;
 				height:       60%;
 				padding-top:  8px;

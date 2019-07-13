@@ -1,0 +1,30 @@
+@import "../../../styles/mixins";
+
+.panels {
+	width:  100%;
+	height: 100%;
+
+	@include tablet() {
+		padding: 0 4px;
+	}
+
+	&__item {
+		display: inline-block;
+		//
+		padding: 4px;
+		width:   100%;
+
+		@include mobile() {
+			width: 50%;
+		}
+
+		@include tablet-sm() {
+			width: 20%;
+		}
+
+		@include tablet() {
+			width:  16.66%;
+			height: 20%;
+		}
+	}
+}

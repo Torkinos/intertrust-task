@@ -23,7 +23,7 @@
 		font-size:  3.6rem;
 		transform:  translateY(-50%);
 
-		@include tablet-sm() {
+		@include tablet() {
 			font-size: 3.2rem;
 			transform: translateY(0);
 		}
