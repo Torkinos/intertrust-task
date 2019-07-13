@@ -27,6 +27,10 @@
 		img {
 			color:  $fontColor;
 			height: 3.8rem;
+
+			@include tablet() {
+				height: 5rem;
+			}
 		}
 	}
 
