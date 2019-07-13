@@ -68,7 +68,7 @@ export function* fetchSolarData() {
 							date       = arr[3], 																		 // get date value for 24 hour forecast
 							fixedDate  = date.replace(/"/g, ""), // remove unnecessary quote marks
 							momentDate = moment(fixedDate), 												 // convert date to moment object
-							hour       = momentDate.format("HH:00"),              // extract only hour value from date
+							hour       = momentDate.format("HH:00"),           // extract only hour value from date
 							value      = Math.round(parseFloat(arr[4]));						 // get value from array
 
 				data.values.push(value);

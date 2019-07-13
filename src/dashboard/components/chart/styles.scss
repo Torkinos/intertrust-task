@@ -13,7 +13,7 @@
 		//
 		padding-bottom: 8px;
 
-		@include tablet-sm() {
+		@include tablet() {
 			padding-bottom: 0;
 			height:         32px;
 		}
@@ -23,7 +23,7 @@
 		width:  100%;
 		height: 100%;
 
-		@include tablet-sm() {
+		@include tablet() {
 			height: calc(100% - 32px) !important;
 		}
 	}

@@ -16,3 +16,8 @@ export const CLOUD_COV = {
 export const SOLAR_ACTIVITY = {
 	title: "solar activity"
 };
+
+export const PANEL = {
+	kw: "kw",
+	v:  "v"
+};
