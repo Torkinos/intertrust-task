@@ -1,4 +1,5 @@
-import React from "react";
+import React     from "react";
+import PropTypes from "prop-types";
 import "./styles.scss";
 
 const card = props => {
@@ -7,6 +8,10 @@ const card = props => {
 			{ props.children }
 		</div>
 	);
+};
+
+card.propTypes = {
+	loading: PropTypes.bool
 };
 
 export default card;

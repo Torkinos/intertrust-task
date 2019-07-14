@@ -18,13 +18,14 @@ class Forecast extends Component {
 
 	render() {
 
-		const { totalKw, cloudData, solarData } = this.props;
+		const { totalKw, cloudData, solarData, cloudDataLoading, solarDataLoading } = this.props;
 
 		const chart = solarData !== null
 									? (
 										<SolarChart
 											data = { solarData.values }
 											labels = { solarData.hours }
+											loading = { solarDataLoading }
 										/>
 									)
 									: null;
@@ -37,14 +38,14 @@ class Forecast extends Component {
 
 					{/*total energy*/ }
 					<div className = "forecast__inner forecast__inner--top">
-						<Card data = { totalKw !== null }>
+						<Card loading = { totalKw !== null }>
 							<TotalKw total = { totalKw } />
 						</Card>
 					</div>
 
 					{/*sky clearness*/ }
 					<div className = "forecast__inner forecast__inner--bot">
-						<Card data = { solarData !== null }>
+						<Card loading = { cloudData !== null }>
 							<CloudCov value = { cloudData } />
 						</Card>
 					</div>
@@ -52,7 +53,7 @@ class Forecast extends Component {
 
 				{/*right container*/ }
 				<div className = "forecast__container forecast__container--right">
-					<Card data = { solarData !== null }>
+					<Card loading = { solarData !== null }>
 						{ chart }
 					</Card>
 				</div>
@@ -62,16 +63,20 @@ class Forecast extends Component {
 }
 
 Forecast.propTypes = {
-	totalKw:   PropTypes.number,
-	cloudData: PropTypes.number,
-	solarData: PropTypes.object,
+	cloudDataLoading: PropTypes.bool,
+	solarDataLoading: PropTypes.bool,
+	totalKw:          PropTypes.number,
+	cloudData:        PropTypes.number,
+	solarData:        PropTypes.object,
 };
 
 const mapStateToProps = state => {
 	return {
-		totalKw:   getTotalKw(state),
-		cloudData: getCloudData(state),
-		solarData: getSolarData(state),
+		totalKw:          getTotalKw(state),
+		cloudData:        getCloudData(state),
+		cloudDataLoading: state.dashboard.cloudDataLoading,
+		solarData:        getSolarData(state),
+		solarDataLoading: state.dashboard.solarDataLoading,
 	};
 };
 
