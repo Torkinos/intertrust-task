@@ -14,15 +14,26 @@ export const fetchPanelData = () => {
 };
 
 /*Actions*/
+export const setCloudDataLoading = payload => {
+	return { type: actionType.SET_CLOUD_DATA_LOADING, payload };
+};
+
 export const setCloudData = payload => {
 	return { type: actionType.SET_CLOUD_DATA, payload };
+};
+
+export const setSolarDataLoading = payload => {
+	return { type: actionType.SET_SOLAR_DATA_LOADING, payload };
 };
 
 export const setSolarData = payload => {
 	return { type: actionType.SET_SOLAR_DATA, payload };
 };
 
+export const setPanelDataLoading = payload => {
+	return { type: actionType.SET_PANEL_DATA_LOADING, payload };
+};
+
 export const setPanelData = payload => {
 	return { type: actionType.SET_PANEL_DATA, payload };
 };
-

@@ -18,7 +18,7 @@
 			}
 
 			@include desktop() {
-				width: 256px;
+				width:  256px;
 			}
 		}
 
@@ -34,7 +34,7 @@
 			}
 
 			@include desktop() {
-				width: calc(100% - 256px);
+				width:        calc(100% - 256px);
 			}
 		}
 	}

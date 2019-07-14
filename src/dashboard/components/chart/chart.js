@@ -38,6 +38,19 @@ class SolarChart extends Component {
 
 		window.addEventListener("resize", this.onResize);
 
+		this.createChart();
+	}
+
+	componentDidUpdate(prevProps) {
+
+		if (prevProps.loading && !this.props.loading) {
+			this.chart.destroy();
+
+			this.createChart();
+		}
+	}
+
+	createChart = () => {
 		this.chart = new Chart(this.ctx.current, {
 			type:    "line",
 			data:    {
@@ -59,11 +72,17 @@ class SolarChart extends Component {
 							beginAtZero: true
 						}
 					}]
+				},
+				elements:            {
+					point: {
+						radius: 0
+					}
 				}
 			}
 		});
-	}
+	};
 
+	// update chart properties on window resize
 	onResize = () => {
 
 		const tablet = window.innerWidth < 1025;
@@ -78,8 +97,9 @@ class SolarChart extends Component {
 }
 
 SolarChart.propTypes = {
-	data:   PropTypes.array,
-	labels: PropTypes.array,
+	loading: PropTypes.bool,
+	data:    PropTypes.array,
+	labels:  PropTypes.array,
 };
 
 export default SolarChart;

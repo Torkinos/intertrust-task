@@ -27,7 +27,7 @@ class Panels extends Component {
 						className = "panels__item"
 						key = { index }
 					>
-						<Card data = { item !== null }>
+						<Card loading = { item === null }>
 							<PanelItem
 								id = { item.id }
 								wattage = { item.wattage }
