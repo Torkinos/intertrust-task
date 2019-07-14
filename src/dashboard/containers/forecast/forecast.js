@@ -38,14 +38,14 @@ class Forecast extends Component {
 
 					{/*total energy*/ }
 					<div className = "forecast__inner forecast__inner--top">
-						<Card loading = { totalKw !== null }>
+						<Card loading = { totalKw === null }>
 							<TotalKw total = { totalKw } />
 						</Card>
 					</div>
 
 					{/*sky clearness*/ }
 					<div className = "forecast__inner forecast__inner--bot">
-						<Card loading = { cloudData !== null }>
+						<Card loading = { cloudData === null }>
 							<CloudCov value = { cloudData } />
 						</Card>
 					</div>
@@ -53,7 +53,7 @@ class Forecast extends Component {
 
 				{/*right container*/ }
 				<div className = "forecast__container forecast__container--right">
-					<Card loading = { solarData !== null }>
+					<Card loading = { solarData === null }>
 						{ chart }
 					</Card>
 				</div>
