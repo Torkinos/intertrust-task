@@ -10,10 +10,12 @@ const header = props => {
 			{/*buttons*/ }
 			<div className = "header__buttons">
 
+				{/*user guide*/ }
 				<div className = "header__button">
 					{ HEADER.userGuide }
 				</div>
 
+				{/*logout*/ }
 				<div className = "header__button">
 					{ HEADER.logout }
 				</div>

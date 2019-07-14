@@ -57,15 +57,15 @@ class DashBoard extends Component {
 		// fetch panel data
 		this.props.fetchPanelData();
 
-		// set fetching  intervals
+		// set fetching intervals
 		setInterval(() => {
 			this.props.fetchPanelData();
-		}, second * 3);
+		}, second * 10);
 
 		setInterval(() => {
 			this.props.fetchCloudData();
 			this.props.fetchSolarData();
-		}, minute * 0.2);
+		}, minute * 5);
 	};
 }
 

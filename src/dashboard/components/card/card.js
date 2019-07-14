@@ -15,6 +15,7 @@ const card = props => {
 		</div>
 	);
 
+	// show loading if data is not loaded
 	const children = props.loading
 									 ? loading
 									 : props.children;

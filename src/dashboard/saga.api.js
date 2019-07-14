@@ -3,7 +3,6 @@ import axios                  from "axios";
 import moment                 from "moment";
 import { getPanelData }       from "./selectors";
 import * as actions           from "./actions";
-import { SOLAR_MOCK }         from "./mock";
 
 // endpoint configurations
 const id        = "bom_access-g_global_40km",
@@ -17,6 +16,7 @@ const forecastUrl = `http://api.planetos.com/v1/datasets/${ id }
 		&lat=${ latitude }
 		&apikey=${ apikey }`;
 
+// fetch cloud coverage forecast
 export function* fetchCloudData() {
 	try {
 
@@ -27,12 +27,29 @@ export function* fetchCloudData() {
 		throw Error;
 
 		// send request
-		const response = yield axios.get(forecastUrl + "&var=av_ttl_cld&csv=true&count=1");
+		const response = yield axios.get(forecastUrl + "&var=av_ttl_cld&csv=true&count=20");
 
 		// sort data
-		const arr       = response.data.split(","),                    // split with commas
-					currValue = arr[arr.length - 1],                         // get the value
-					data      = Math.round(parseFloat(currValue) * 100);   // parse and round the value
+		const arrSplit = response.data.split("\n"); // split with commas
+
+		// find current time
+		const arr = arrSplit.find(arr => {
+
+			// get time
+			const axisTime = arr.split(",")[3].replace(/"/g, "");
+
+			// parse time as moment object
+			const momentTime = moment(axisTime);
+
+			// compare and return
+			return momentTime >= moment() && momentTime < moment().add(3, "hours");
+		});
+
+		// get value from found array
+		const value = arr.split(",")[4];
+
+		//
+		const data = Math.round(parseFloat(value) * 100);   // parse and round the value
 
 		// save in store
 		yield put(actions.setCloudData(data));
@@ -51,10 +68,12 @@ export function* fetchCloudData() {
 		// end loading
 		yield put(actions.setCloudDataLoading(false));
 
+		// save in store
 		yield put(actions.setCloudData(generateRandom(0, 100)));
 	}
 }
 
+// fetch solar activity forecast
 export function* fetchSolarData() {
 	try {
 
@@ -65,11 +84,7 @@ export function* fetchSolarData() {
 		throw Error;
 
 		// send request
-		// const response = yield axios.get(forecastUrl + "&var=av_swsfcdown&csv=true&count=20");
-
-		const response = {
-			data: SOLAR_MOCK
-		};
+		const response = yield axios.get(forecastUrl + "&var=av_swsfcdown&csv=true&count=20");
 
 		const data = {
 			values: [],
@@ -86,12 +101,12 @@ export function* fetchSolarData() {
 				const arr        = item.split(","),                    // split with commas
 							date       = arr[3], 																		 // get date value for 24 hour forecast
 							fixedDate  = date.replace(/"/g, ""), // remove unnecessary quote marks
-							momentDate = moment(fixedDate);												 // convert date to moment object
+							momentDate = moment(fixedDate);										  		 // convert date to moment object
 
 				if (momentDate > moment().subtract(3, "hours") && dayIndex < 9) {
 
 					const hour  = momentDate.format("HH:00"),           // extract only hour value from date
-								value = Math.round(parseFloat(arr[4]));						 // get value from array
+								value = Math.round(parseFloat(arr[4]));						  // get value from array
 
 					data.values.push(value);
 					data.hours.push(hour);
@@ -122,6 +137,7 @@ export function* fetchSolarData() {
 	}
 }
 
+// fetch solar panel data
 export function* fetchPanelData() {
 
 	// create mock data for solar panels
@@ -151,6 +167,7 @@ export function* fetchPanelData() {
 	}
 }
 
+// generate fake solar activity forecast
 const generateSolarData = () => {
 
 	const data = {
@@ -198,6 +215,7 @@ const generateSolarData = () => {
 	return data;
 };
 
+// generate fake solar panel data
 const generatePanelData = () => {
 
 	const data = [];
@@ -219,6 +237,7 @@ const generatePanelData = () => {
 	return data;
 };
 
+// add fake numbers on solar panel data
 const updatePanelData = data => {
 
 	return data.map(item => {
