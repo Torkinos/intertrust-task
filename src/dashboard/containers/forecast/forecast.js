@@ -18,7 +18,7 @@ class Forecast extends Component {
 
 	render() {
 
-		const { totalKw, cloudData, solarData, cloudDataLoading, solarDataLoading } = this.props;
+		const { totalKw, cloudData, solarData, solarDataLoading } = this.props;
 
 		const chart = solarData !== null
 									? (

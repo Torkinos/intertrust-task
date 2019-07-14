@@ -223,7 +223,7 @@ const updatePanelData = data => {
 
 	return data.map(item => {
 
-		const wattage = Math.round(item.wattage + generateRandom(0.7, 1.1));
+		const wattage = item.wattage + generateRandom(0.7, 1.2);
 
 		return {
 			...item,

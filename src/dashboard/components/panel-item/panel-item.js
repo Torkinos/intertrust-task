@@ -5,6 +5,10 @@ import "./styles.scss";
 import { PANEL } from "../../../static/constants/constants";
 
 const panelItem = props => {
+
+	const wattage = Math.round(props.wattage);
+	const voltage = Math.round(props.voltage);
+
 	return (
 		<div className = "pan-item">
 			<div className = "pan-item__inner">
@@ -16,12 +20,12 @@ const panelItem = props => {
 
 				{/*wattage*/ }
 				<div className = "pan-item__container pan-item__container--mid">
-					{ props.wattage + PANEL.kw }
+					{ wattage + PANEL.kw }
 				</div>
 
 				{/*voltage*/ }
 				<div className = "pan-item__container pan-item__container--right">
-					{ props.voltage + PANEL.v }
+					{ voltage + PANEL.v }
 				</div>
 			</div>
 		</div>
