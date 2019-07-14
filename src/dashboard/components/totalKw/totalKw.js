@@ -6,7 +6,7 @@ import { TOTAL_KW } from "../../../static/constants/constants";
 
 const totalKw = props => {
 
-	const total = props.total + TOTAL_KW.kw;
+	const total = Math.round(props.total);
 
 	return (
 		<div className = "total-kw">
@@ -18,7 +18,7 @@ const totalKw = props => {
 
 			{/*info number*/ }
 			<div className = "total-kw__info">
-				{ total }
+				{ total + TOTAL_KW.kw }
 			</div>
 		</div>
 	);
