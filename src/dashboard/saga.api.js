@@ -16,62 +16,6 @@ const forecastUrl = `http://api.planetos.com/v1/datasets/${ id }
 		&lat=${ latitude }
 		&apikey=${ apikey }`;
 
-// fetch cloud coverage forecast
-export function* fetchCloudData() {
-	try {
-
-		// start loading
-		yield put(actions.setCloudDataLoading(true));
-
-		//TODO: should be removed later
-		throw Error;
-
-		// send request
-		const response = yield axios.get(forecastUrl + "&var=av_ttl_cld&csv=true&count=20");
-
-		// sort data
-		const arrSplit = response.data.split("\n"); // split with commas
-
-		// find current time
-		const arr = arrSplit.find(arr => {
-
-			// get time
-			const axisTime = arr.split(",")[3].replace(/"/g, "");
-
-			// parse time as moment object
-			const momentTime = moment(axisTime);
-
-			// compare and return
-			return momentTime >= moment() && momentTime < moment().add(3, "hours");
-		});
-
-		// get value from found array
-		const value = arr.split(",")[4];
-
-		//
-		const data = Math.round(parseFloat(value) * 100);   // parse and round the value
-
-		// save in store
-		yield put(actions.setCloudData(data));
-
-		// end loading
-		yield put(actions.setCloudDataLoading(false));
-	}
-	catch (e) {
-
-		// in case of error use mock data
-		console.log("error : ", e);
-
-		// create effect of server fetching
-		yield delay(500);
-
-		// end loading
-		yield put(actions.setCloudDataLoading(false));
-
-		// save in store
-		yield put(actions.setCloudData(generateRandom(0, 100)));
-	}
-}
 
 // fetch solar activity forecast
 export function* fetchSolarData() {
@@ -79,9 +23,6 @@ export function* fetchSolarData() {
 
 		// start loading
 		yield put(actions.setSolarDataLoading(true));
-
-		//TODO: should be removed later
-		throw Error;
 
 		// send request
 		const response = yield axios.get(forecastUrl + "&var=av_swsfcdown&csv=true&count=20");
@@ -134,6 +75,63 @@ export function* fetchSolarData() {
 		yield put(actions.setSolarDataLoading(false));
 
 		yield put(actions.setSolarData(generateSolarData()));
+	}
+}
+
+// fetch cloud coverage forecast
+export function* fetchCloudData() {
+	try {
+
+		// start loading
+		yield put(actions.setCloudDataLoading(true));
+
+		// send request
+		const response = yield axios.get(forecastUrl + "&var=av_ttl_cld&csv=true&count=20");
+
+		// split with lines
+		const arrSplit = response.data.split("\n");
+
+		// remove header from array
+		arrSplit.shift();
+
+		// find current time
+		const arr = arrSplit.find(arr => {
+
+			// get time
+			const axisTime = arr.split(",")[3].replace(/"/g, "");
+
+			// parse time as moment object
+			const momentTime = moment(axisTime);
+
+			// compare and return
+			return momentTime >= moment() && momentTime < moment().add(3, "hours");
+		});
+
+		// get value from found array
+		const value = arr.split(",")[4];
+
+		//
+		const data = Math.round(parseFloat(value) * 100);   // parse and round the value
+
+		// save in store
+		yield put(actions.setCloudData(data));
+
+		// end loading
+		yield put(actions.setCloudDataLoading(false));
+	}
+	catch (e) {
+
+		// in case of error use mock data
+		console.log("error : ", e);
+
+		// create effect of server fetching
+		yield delay(500);
+
+		// end loading
+		yield put(actions.setCloudDataLoading(false));
+
+		// save in store
+		yield put(actions.setCloudData(generateRandom(0, 100)));
 	}
 }
 
