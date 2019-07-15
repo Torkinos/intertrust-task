@@ -23,10 +23,14 @@ class Panels extends Component {
 		if (panels) {
 			list = panels.map((item, index) => {
 				return (
+
+					// container
 					<div
 						className = "panels__item"
 						key = { index }
 					>
+
+						{/*item*/ }
 						<Card loading = { item === null }>
 							<PanelItem
 								id = { item.id }

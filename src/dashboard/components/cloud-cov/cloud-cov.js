@@ -13,12 +13,15 @@ const cloudCoverage = props => {
 
 	const info = value + "% " + CLOUD_COV.clearSky;
 
+	// default
 	let weatherIcon = cloudSunIcon;
 
+	// if more than 2/3 show sun icon
 	if (value > 66.66) {
 		weatherIcon = sunIcon;
 	}
 
+	// if less than 1/3 show cloud icon
 	if (value < 33.33) {
 		weatherIcon = cloudIcon;
 	}

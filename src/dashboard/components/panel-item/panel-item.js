@@ -6,8 +6,8 @@ import { PANEL } from "../../../static/constants/constants";
 
 const panelItem = props => {
 
-	const wattage = Math.round(props.wattage);
-	const voltage = Math.round(props.voltage);
+	const wattage = Math.round(props.wattage),
+				voltage = Math.round(props.voltage);
 
 	return (
 		<div className = "pan-item">
