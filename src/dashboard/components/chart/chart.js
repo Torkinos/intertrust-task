@@ -27,9 +27,7 @@ class SolarChart extends Component {
 				</div>
 
 				{/*chart*/ }
-				<canvas
-					ref = { this.ctx }
-				/>
+				<canvas ref = { this.ctx } />
 			</div>
 		);
 	}
@@ -50,6 +48,7 @@ class SolarChart extends Component {
 		}
 	}
 
+	// chart properties
 	createChart = () => {
 		this.chart = new Chart(this.ctx.current, {
 			type:    "line",
